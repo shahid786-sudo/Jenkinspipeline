@@ -18,5 +18,16 @@ pipeline{
             }
           }
         }
+        stage ('Pushing the docker image to docker repository'){
+          steps{
+            script{
+                withDockerRegistry(credentialsId: 'docker-credentials', url: 'https://hub.docker.com/') {
+                docker.push ('latest')
+                docker.push ('$BUILD_NUMBER')
+                }
+             }
+          }
+
+        }
     }
 }
