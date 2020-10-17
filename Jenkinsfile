@@ -1,7 +1,7 @@
 pipeline{
     environment {
         registry = "shahid9741/jenkins"
-        registrCredential = 'docker-credentials'
+        registryCredential = 'docker-credentials'
         docker = ''
     }
     agent any
@@ -14,7 +14,7 @@ pipeline{
         stage ('Building jenkins image'){
           steps{
             script{
-            docker = docker.build registery + ":$BUILD_NUMBER"
+            docker = docker.build registry + ":$BUILD_NUMBER"
             }
           }
         }
