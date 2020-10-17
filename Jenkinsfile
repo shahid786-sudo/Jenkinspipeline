@@ -21,7 +21,7 @@ pipeline{
         stage ('Pushing the docker image to docker repository'){
           steps{
             script{
-                withDockerRegistry(credentialsId: 'docker-credentials', url: 'https://registry.hub.docker.com') {
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials') {
                 docker.push ('latest')
                 docker.push ('$BUILD_NUMBER')
                 }
