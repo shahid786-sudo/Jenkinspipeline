@@ -14,7 +14,7 @@ pipeline{
         stage ('Building jenkins image'){
           steps{
             script{
-            docker = docker.build register + ":$BUILD_NUMBER"
+            docker = docker.build registery + ":$BUILD_NUMBER"
             }
           }
         }
