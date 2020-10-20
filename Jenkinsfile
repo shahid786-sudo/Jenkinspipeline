@@ -37,7 +37,7 @@ pipeline{
             withCredentials([usernameColonPassword(credentialsId: 'sudo-user', variable: 'sudoCredential')]) {
             sh '''
             echo 'echo "Deployment of jenkins application"'
-            kubectl create -f Jenkinsdeployment.yaml
+            sudo kubectl create -f Jenkinsdeployment.yaml
             '''
              }
           }
