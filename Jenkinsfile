@@ -34,6 +34,7 @@ pipeline{
           script{
             sh 'echo "Deploying jenkins application"'
             sh '''
+	    sudo -i
             kubectl create -f Jenkinsdeployment.yaml
             '''        
           }
