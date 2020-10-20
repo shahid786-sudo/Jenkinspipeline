@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Jenkins
+  template:
+    metadata:
+      labels:
+        app: Jenkins
+    spec:
+      containers:
+      - name: Jenkins
+        image: shahid9741/jenkins:latest
+        ports:
+        - containerPort: 8080
+      nodeName: shahid-node01
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: Jenkins-Service
+spec:
+  type: ClusterIP
+  selector:
+    app: Jenkins
+  ports:
+  - port: 80
+    targetPort: 8080
