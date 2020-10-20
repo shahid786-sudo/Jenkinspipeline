@@ -22,12 +22,22 @@ pipeline{
           steps{
             script{
                 docker.withRegistry( '', registryCredential ) {
-				dockerapp.push('latest')
+		dockerapp.push('latest')
                 dockerapp.push ('$BUILD_NUMBER')
                 }
              }
           }
 
         }
+        stage ('Deployment of jenkins application on node01'){
+        steps{
+          script{
+            sh 'echo "Deploying jenkins application"'
+            sh '''
+            kubectl create -f Jenkinsdeployment.yaml
+            '''        
+          }
+        }
     }
+ }
 }
