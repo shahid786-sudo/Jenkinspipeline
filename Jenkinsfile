@@ -2,6 +2,7 @@ pipeline{
     environment {
         registry = "shahid9741/jenkins"
         registryCredential = 'docker-credentials'
+        sudoCredential = 'sudo-user'
         dockerapp = ''
     }
     agent any
@@ -22,7 +23,7 @@ pipeline{
           steps{
             script{
                 docker.withRegistry( '', registryCredential ) {
-		dockerapp.push('latest')
+				dockerapp.push('latest')
                 dockerapp.push ('$BUILD_NUMBER')
                 }
              }
@@ -32,11 +33,13 @@ pipeline{
         stage ('Deployment of jenkins application on node01'){
         steps{
           script{
-            sh 'echo "Deploying jenkins application"'
+            sh 'echo "login to the sudo user"'
+            withCredentials([usernameColonPassword(credentialsId: 'sudo-user', variable: 'sudoCredential')]) {
             sh '''
-	    sudo -i
+            echo 'echo "Deployment of jenkins application"'
             kubectl create -f Jenkinsdeployment.yaml
-            '''        
+            '''
+             }
           }
         }
     }
