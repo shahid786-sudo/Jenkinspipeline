@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Jenkins
+  name: jenkins
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Jenkins
+      app: jenkins
   template:
     metadata:
       labels:
-        app: Jenkins
+        app: jenkins
     spec:
       containers:
-      - name: Jenkins
+      - name: jenkins
         image: shahid9741/jenkins:latest
         ports:
         - containerPort: 8080
@@ -22,11 +22,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: Jenkins-Service
+  name: jenkins
 spec:
   type: ClusterIP
   selector:
-    app: Jenkins
+    app: jenkins
   ports:
   - port: 80
     targetPort: 8080
