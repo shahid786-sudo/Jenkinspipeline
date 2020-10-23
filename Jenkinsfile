@@ -34,7 +34,7 @@ pipeline{
           sshagent(['kube-master-node']){
           sh 'ssh -vvv -o StrictHostKeyChecking=no -T shahid@192.168.0.8'
           sh 'scp -r Jenkinsdeployment.yaml shahid@192.168.0.8:/home/shahid'
-          sh 'ssh shahid@192.168.0.8 kubectl create -f Jenkinsdeployment.yaml
+          sh 'ssh shahid@192.168.0.8 kubectl create -f Jenkinsdeployment.yaml'
              }
           }
         }
